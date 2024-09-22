@@ -1,0 +1,186 @@
+global:
+  # Labels to apply to all resources.
+  # Please note that this does not add labels to the resources created dynamically by the controllers.
+  # For these resources, you have to add the labels in the template in the cert-manager custom resource:
+  # For example, podTemplate/ ingressTemplate in ACMEChallengeSolverHTTP01Ingress
+  # For more information, see the [cert-manager documentation](https://cert-manager.io/docs/reference/api-docs/#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress).
+  # For example, secretTemplate in CertificateSpec
+  # For more information, see the [cert-manager documentation](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec).
+  commonLabels:
+    tags.datadoghq.com/service: cert-manager
+    tags.datadoghq.com/source: cert-manager
+
+crds:
+  # This option decides if the CRDs should be installed
+  # as part of the Helm installation.
+  enabled: true
+
+  # This option makes it so that the "helm.sh/resource-policy": keep
+  # annotation is added to the CRD. This will prevent Helm from uninstalling
+  # the CRD when the Helm release is uninstalled.
+  # WARNING: when the CRDs are removed, all cert-manager custom resources
+  # (Certificates, Issuers, ...) will be removed too by the garbage collector.
+  keep: true
+
+replicaCount: 1
+
+image:
+  repository: "us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"
+
+# Optional additional labels to add to the controller Pods.
+podLabels: {}
+
+prometheus:
+  # Enable Prometheus monitoring for the cert-manager controller to use with the
+  # Prometheus Operator. If this option is enabled without enabling `prometheus.servicemonitor.enabled` or
+  # `prometheus.podmonitor.enabled`, 'prometheus.io' annotations are added to the cert-manager Deployment
+  # resources. Additionally, a service is created which can be used together
+  # with your own ServiceMonitor (managed outside of this Helm chart).
+  # Otherwise, a ServiceMonitor/ PodMonitor is created.
+  enabled: true
+
+  servicemonitor:
+    # Create a ServiceMonitor to add cert-manager to Prometheus.
+    enabled: false
+
+    # Specifies the `prometheus` label on the created ServiceMonitor. This is
+    # used when different Prometheus instances have label selectors matching
+    # different ServiceMonitors.
+    prometheusInstance: default
+
+    # The target port to set on the ServiceMonitor. This must match the port that the
+    # cert-manager controller is listening on for metrics.
+    targetPort: 9402
+
+    # The path to scrape for metrics.
+    path: /metrics
+
+    # The interval to scrape metrics.
+    interval: 60s
+
+    # The timeout before a metrics scrape fails.
+    scrapeTimeout: 30s
+
+    # Additional labels to add to the ServiceMonitor.
+    labels: {}
+
+    # Additional annotations to add to the ServiceMonitor.
+    annotations: {}
+
+    # Keep labels from scraped data, overriding server-side labels.
+    honorLabels: false
+
+    # EndpointAdditionalProperties allows setting additional properties on the
+    # endpoint such as relabelings, metricRelabelings etc.
+    #
+    # For example:
+    #  endpointAdditionalProperties:
+    #   relabelings:
+    #   - action: replace
+    #     sourceLabels:
+    #     - __meta_kubernetes_pod_node_name
+    #     targetLabel: instance
+    #
+    # +docs:property
+    endpointAdditionalProperties: {}
+
+  # Note that you can not enable both PodMonitor and ServiceMonitor as they are mutually exclusive. Enabling both will result in a error.
+  podmonitor:
+    # Create a PodMonitor to add cert-manager to Prometheus.
+    enabled: false
+
+    # Specifies the `prometheus` label on the created PodMonitor. This is
+    # used when different Prometheus instances have label selectors matching
+    # different PodMonitors.
+    prometheusInstance: default
+
+    # The path to scrape for metrics.
+    path: /metrics
+
+    # The interval to scrape metrics.
+    interval: 60s
+
+    # The timeout before a metrics scrape fails.
+    scrapeTimeout: 30s
+
+    # Additional labels to add to the PodMonitor.
+    labels: {}
+
+    # Additional annotations to add to the PodMonitor.
+    annotations: {}
+
+    # Keep labels from scraped data, overriding server-side labels.
+    honorLabels: false
+
+    # EndpointAdditionalProperties allows setting additional properties on the
+    # endpoint such as relabelings, metricRelabelings etc.
+    #
+    # For example:
+    #  endpointAdditionalProperties:
+    #   relabelings:
+    #   - action: replace
+    #     sourceLabels:
+    #     - __meta_kubernetes_pod_node_name
+    #     targetLabel: instance
+    #
+    # +docs:property
+    endpointAdditionalProperties: {}
+
+# +docs:section=Webhook
+
+webhook:
+  # Number of replicas of the cert-manager webhook to run.
+  #
+  # The default is 1, but in production set this to 2 or 3 to provide high
+  # availability.
+  #
+  # If `replicas > 1`, consider setting `webhook.podDisruptionBudget.enabled=true`.
+  replicaCount: 1
+
+  # Optional additional labels to add to the Webhook Pods.
+  podLabels: {}
+
+  image:
+    # repository: quay.io/jetstack/cert-manager-webhook
+    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+
+cainjector:
+  # Create the CA Injector deployment
+  enabled: true
+
+  # The number of replicas of the cert-manager cainjector to run.
+  #
+  # The default is 1, but in production set this to 2 or 3 to provide high
+  # availability.
+  #
+  # If `replicas > 1`, consider setting `cainjector.podDisruptionBudget.enabled=true`.
+  #
+  # Note that cert-manager uses leader election to ensure that there can
+  # only be a single instance active at a time.
+  replicaCount: 1
+
+  # Optional additional labels to add to the CA Injector Pods.
+  podLabels: {}
+
+  image:
+    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+
+acmesolver:
+  image:
+    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+
+startupapicheck:
+  # Enables the startup api check.
+  enabled: true
+
+  # Optional additional labels to add to the startupapicheck Pods.
+  podLabels: {}
+
+  image:
+    # The container registry to pull the startupapicheck image from.
+    # +docs:property
+    # registry: quay.io
+
+    # The container image for the cert-manager startupapicheck.
+    # +docs:property
+    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
