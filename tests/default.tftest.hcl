@@ -7,16 +7,7 @@
 mock_provider "google" {}
 mock_provider "helm" {}
 mock_provider "kubernetes" {}
-
-mock_provider "terraform" {
-  mock_data "terraform_remote_state" {
-    defaults = {
-      outputs = {
-        gateway_mci_global_address = "192.0.2.0" # https://www.rfc-editor.org/rfc/rfc5737#section-3
-      }
-    }
-  }
-}
+mock_provider "terraform" {}
 
 run "default_regional" {
   command = apply
@@ -32,5 +23,4 @@ run "default_regional" {
 
 variables {
   environment = "mock-environment"
-  project     = "mock-project"
 }
