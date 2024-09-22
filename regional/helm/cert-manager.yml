@@ -1,31 +1,22 @@
 global:
-  # Labels to apply to all resources.
-  # Please note that this does not add labels to the resources created dynamically by the controllers.
-  # For these resources, you have to add the labels in the template in the cert-manager custom resource:
-  # For example, podTemplate/ ingressTemplate in ACMEChallengeSolverHTTP01Ingress
-  # For more information, see the [cert-manager documentation](https://cert-manager.io/docs/reference/api-docs/#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress).
-  # For example, secretTemplate in CertificateSpec
-  # For more information, see the [cert-manager documentation](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec).
   commonLabels:
     tags.datadoghq.com/service: cert-manager
-    tags.datadoghq.com/source: cert-manager
 
 crds:
-  # This option decides if the CRDs should be installed
-  # as part of the Helm installation.
   enabled: true
-
-  # This option makes it so that the "helm.sh/resource-policy": keep
-  # annotation is added to the CRD. This will prevent Helm from uninstalling
-  # the CRD when the Helm release is uninstalled.
-  # WARNING: when the CRDs are removed, all cert-manager custom resources
-  # (Certificates, Issuers, ...) will be removed too by the garbage collector.
-  keep: true
 
 replicaCount: 1
 
+resources:
+  limits:
+    cpu: 20m
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
 image:
-  repository: "us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"
+  repository: quay.io/jetstack/cert-manager-controller
 
 # Optional additional labels to add to the controller Pods.
 podLabels: {}
@@ -141,8 +132,15 @@ webhook:
   podLabels: {}
 
   image:
-    # repository: quay.io/jetstack/cert-manager-webhook
-    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+    repository: quay.io/jetstack/cert-manager-webhook
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
 
 cainjector:
   # Create the CA Injector deployment
@@ -163,11 +161,27 @@ cainjector:
   podLabels: {}
 
   image:
-    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+    repository: quay.io/jetstack/cert-manager-cainjector
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
 
 acmesolver:
   image:
-    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+    repository: quay.io/jetstack/cert-manager-acmesolver
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
 
 startupapicheck:
   # Enables the startup api check.
@@ -183,4 +197,12 @@ startupapicheck:
 
     # The container image for the cert-manager startupapicheck.
     # +docs:property
-    repository: us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual
+    repository: quay.io/jetstack/cert-manager-startupapicheck
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
