@@ -30,12 +30,6 @@ variable "cert_manager_istio_csr_version" {
   default     = "0.12.0"
 }
 
-variable "cert_manager_version" {
-  description = "The version to install, this is used for the chart as well as the image tag"
-  type        = string
-  default     = "1.15.3"
-}
-
 variable "node_location" {
   description = "The zone in which the cluster's nodes should be located. If not specified, the cluster's nodes are located across zones in the region"
   type        = string
