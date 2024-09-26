@@ -22,6 +22,11 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
         group = "cert-manager.io"
       }
 
+      privateKey = {
+        algorithm = "ECDSA"
+        size      = 256
+      }
+
       secretName = "istio-ca"
 
       subject = {
@@ -45,6 +50,24 @@ resource "kubernetes_manifest" "istio_ca_issuer" {
       ca = {
         secretName = "istio-ca"
       }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "ingress_gateway_tls" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Certificate"
+
+    metadata = {
+      name      = "ingress-cert"
+      namespace = "istio-ingress"
+    }
+
+    spec = {
+      secretName = "gateway-tls"
+      commonName = "istio.osinfra.io"
+      dnsNames   = ["istio.osinfra.io"]
     }
   }
 }
