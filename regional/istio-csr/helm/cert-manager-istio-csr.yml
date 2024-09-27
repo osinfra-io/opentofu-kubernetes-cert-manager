@@ -1,3 +1,7 @@
+app:
+  tls:
+    rootCAFile: /var/run/secrets/istio-csr/ca.pem
+
 replicaCount: 1
 
 image:
@@ -12,3 +16,12 @@ resources:
   requests:
     cpu: 25m
     memory: 32Mi
+
+volumes:
+ - name: root-ca
+   secret:
+     secretName: istio-root-ca
+
+volumeMounts:
+ - name: root-ca
+   mountPath: /var/run/secrets/istio-csr
