@@ -1,6 +1,6 @@
 app:
   server:
-    clusterID: "plt-us-east1-b-sb"
+    clusterID: "plt-us-east1-sb"
 
   tls:
     rootCAFile: /var/run/secrets/istio-csr/ca.pem
