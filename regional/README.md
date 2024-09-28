@@ -11,8 +11,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.15.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.32.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.14.1 |
 
 ## Modules
 
@@ -23,7 +22,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_namespace_v1.cert_manager](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace_v1) | resource |
 
 ## Inputs
 
