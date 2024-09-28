@@ -27,7 +27,7 @@ variable "environment" {
 variable "cert_manager_istio_csr_version" {
   description = "The version to install for the Istio CSR, this is used for the chart as well as the image tag"
   type        = string
-  default     = "0.11.0"
+  default     = "0.12.0"
 }
 
 variable "node_location" {

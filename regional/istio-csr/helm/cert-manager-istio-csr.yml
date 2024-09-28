@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   repository: quay.io/jetstack/cert-manager-istio-csr
 
-# deploymentLabels: {}
+deploymentLabels: {}
 
 resources:
   limits:
