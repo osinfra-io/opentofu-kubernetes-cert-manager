@@ -2,8 +2,8 @@ app:
   server:
     clusterID: "plt-us-east1-sb"
 
-  tls:
-    rootCAFile: /var/run/secrets/istio-csr/ca.pem
+  # tls:
+  #   rootCAFile: /var/run/secrets/istio-csr/ca.pem
 
 replicaCount: 1
 
@@ -20,11 +20,11 @@ resources:
     cpu: 25m
     memory: 32Mi
 
-volumes:
- - name: root-ca
-   secret:
-     secretName: istio-root-ca
+# volumes:
+#  - name: root-ca
+#    secret:
+#      secretName: istio-root-ca
 
-volumeMounts:
- - name: root-ca
-   mountPath: /var/run/secrets/istio-csr
+# volumeMounts:
+#  - name: root-ca
+#    mountPath: /var/run/secrets/istio-csr
