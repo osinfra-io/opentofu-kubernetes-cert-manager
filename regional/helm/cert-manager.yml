@@ -20,16 +20,6 @@ image:
   repository: quay.io/jetstack/cert-manager-controller
 
 podAnnotations:
-  ad.datadoghq.com/discovery.check_names: '["cert-manager"]'
-  ad.datadoghq.com/discovery.init_configs: '[{}]'
-
-  ad.datadoghq.com/discovery.instances: |
-    [
-      {
-        "openmetrics_endpoint": "http://%%host%%:9402/metrics"
-      }
-    ]
-
   ad.datadoghq.com/discovery.logs: '[{"source":"cert-manager"}]'
 
 webhook:
