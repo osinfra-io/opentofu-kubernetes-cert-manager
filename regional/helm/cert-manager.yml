@@ -1,6 +1,7 @@
 global:
   commonLabels:
     tags.datadoghq.com/service: cert-manager
+    tags.datadoghq.com/source: cert-manager
 
 crds:
   enabled: true
@@ -25,7 +26,7 @@ podAnnotations:
   ad.datadoghq.com/discovery.instances: |
     [
       {
-        "openmetrics_endpoint": "http://%%host%%:9402/metrics",
+        "openmetrics_endpoint": "http://%%host%%:9402/metrics"
       }
     ]
 
