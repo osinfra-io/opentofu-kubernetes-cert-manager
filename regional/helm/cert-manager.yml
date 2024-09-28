@@ -25,7 +25,7 @@ podAnnotations:
   ad.datadoghq.com/discovery.instances: |
     [
       {
-        "openmetrics_endpoint": "http://%%host%%:15014/metrics",
+        "openmetrics_endpoint": "http://%%host%%:9402/metrics",
       }
     ]
 
