@@ -19,9 +19,6 @@ resources:
 image:
   repository: quay.io/jetstack/cert-manager-controller
 
-podAnnotations:
-  ad.datadoghq.com/discovery.logs: '[{"source":"cert-manager"}]'
-
 webhook:
   replicaCount: 1
 
