@@ -18,118 +18,21 @@ resources:
 image:
   repository: quay.io/jetstack/cert-manager-controller
 
-# Optional additional labels to add to the controller Pods.
-podLabels: {}
+podAnnotations:
+  ad.datadoghq.com/discovery.check_names: '["cert-manager"]'
+  ad.datadoghq.com/discovery.init_configs: '[{}]'
 
-prometheus:
-  # Enable Prometheus monitoring for the cert-manager controller to use with the
-  # Prometheus Operator. If this option is enabled without enabling `prometheus.servicemonitor.enabled` or
-  # `prometheus.podmonitor.enabled`, 'prometheus.io' annotations are added to the cert-manager Deployment
-  # resources. Additionally, a service is created which can be used together
-  # with your own ServiceMonitor (managed outside of this Helm chart).
-  # Otherwise, a ServiceMonitor/ PodMonitor is created.
-  enabled: true
+  ad.datadoghq.com/discovery.instances: |
+    [
+      {
+        "openmetrics_endpoint": "http://%%host%%:15014/metrics",
+      }
+    ]
 
-  servicemonitor:
-    # Create a ServiceMonitor to add cert-manager to Prometheus.
-    enabled: false
-
-    # Specifies the `prometheus` label on the created ServiceMonitor. This is
-    # used when different Prometheus instances have label selectors matching
-    # different ServiceMonitors.
-    prometheusInstance: default
-
-    # The target port to set on the ServiceMonitor. This must match the port that the
-    # cert-manager controller is listening on for metrics.
-    targetPort: 9402
-
-    # The path to scrape for metrics.
-    path: /metrics
-
-    # The interval to scrape metrics.
-    interval: 60s
-
-    # The timeout before a metrics scrape fails.
-    scrapeTimeout: 30s
-
-    # Additional labels to add to the ServiceMonitor.
-    labels: {}
-
-    # Additional annotations to add to the ServiceMonitor.
-    annotations: {}
-
-    # Keep labels from scraped data, overriding server-side labels.
-    honorLabels: false
-
-    # EndpointAdditionalProperties allows setting additional properties on the
-    # endpoint such as relabelings, metricRelabelings etc.
-    #
-    # For example:
-    #  endpointAdditionalProperties:
-    #   relabelings:
-    #   - action: replace
-    #     sourceLabels:
-    #     - __meta_kubernetes_pod_node_name
-    #     targetLabel: instance
-    #
-    # +docs:property
-    endpointAdditionalProperties: {}
-
-  # Note that you can not enable both PodMonitor and ServiceMonitor as they are mutually exclusive. Enabling both will result in a error.
-  podmonitor:
-    # Create a PodMonitor to add cert-manager to Prometheus.
-    enabled: false
-
-    # Specifies the `prometheus` label on the created PodMonitor. This is
-    # used when different Prometheus instances have label selectors matching
-    # different PodMonitors.
-    prometheusInstance: default
-
-    # The path to scrape for metrics.
-    path: /metrics
-
-    # The interval to scrape metrics.
-    interval: 60s
-
-    # The timeout before a metrics scrape fails.
-    scrapeTimeout: 30s
-
-    # Additional labels to add to the PodMonitor.
-    labels: {}
-
-    # Additional annotations to add to the PodMonitor.
-    annotations: {}
-
-    # Keep labels from scraped data, overriding server-side labels.
-    honorLabels: false
-
-    # EndpointAdditionalProperties allows setting additional properties on the
-    # endpoint such as relabelings, metricRelabelings etc.
-    #
-    # For example:
-    #  endpointAdditionalProperties:
-    #   relabelings:
-    #   - action: replace
-    #     sourceLabels:
-    #     - __meta_kubernetes_pod_node_name
-    #     targetLabel: instance
-    #
-    # +docs:property
-    endpointAdditionalProperties: {}
-
-# +docs:section=Webhook
+  ad.datadoghq.com/discovery.logs: '[{"source":"cert-manager"}]'
 
 webhook:
-  # Number of replicas of the cert-manager webhook to run.
-  #
-  # The default is 1, but in production set this to 2 or 3 to provide high
-  # availability.
-  #
-  # If `replicas > 1`, consider setting `webhook.podDisruptionBudget.enabled=true`.
   replicaCount: 1
-
-  # Optional additional labels to add to the Webhook Pods.
-  podLabels: {}
 
   image:
     repository: quay.io/jetstack/cert-manager-webhook
@@ -143,22 +46,7 @@ webhook:
       memory: 32Mi
 
 cainjector:
-  # Create the CA Injector deployment
-  enabled: true
-
-  # The number of replicas of the cert-manager cainjector to run.
-  #
-  # The default is 1, but in production set this to 2 or 3 to provide high
-  # availability.
-  #
-  # If `replicas > 1`, consider setting `cainjector.podDisruptionBudget.enabled=true`.
-  #
-  # Note that cert-manager uses leader election to ensure that there can
-  # only be a single instance active at a time.
   replicaCount: 1
-
-  # Optional additional labels to add to the CA Injector Pods.
-  podLabels: {}
 
   image:
     repository: quay.io/jetstack/cert-manager-cainjector
@@ -184,19 +72,7 @@ acmesolver:
       memory: 32Mi
 
 startupapicheck:
-  # Enables the startup api check.
-  enabled: true
-
-  # Optional additional labels to add to the startupapicheck Pods.
-  podLabels: {}
-
   image:
-    # The container registry to pull the startupapicheck image from.
-    # +docs:property
-    # registry: quay.io
-
-    # The container image for the cert-manager startupapicheck.
-    # +docs:property
     repository: quay.io/jetstack/cert-manager-startupapicheck
 
   resources:

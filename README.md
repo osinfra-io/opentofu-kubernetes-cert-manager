@@ -1,4 +1,4 @@
-# <img align="left" width="45" height="45" src="https://github.com/user-attachments/assets/62b967f2-b2eb-4309-991b-e25e08bf2b0d"> Kubernetes - `cert-manager` Terraform Module
+# <img align="left" width="45" height="45" src="https://github.com/user-attachments/assets/62b967f2-b2eb-4309-991b-e25e08bf2b0d"> Kubernetes - cert-manager Terraform Module
 
 **[GitHub Actions](https://github.com/osinfra-io/terraform-kubernetes-cert-manager/actions):**
 
@@ -12,7 +12,7 @@
 
 ## Repository Description
 
-Terraform **example** module for a Google Cloud Platform Kubernetes engine cluster.
+Terraform **example** module for cert-manager on Google Kubernetes Engine (GKE).
 
 > [!NOTE]
 > We do not recommend consuming this module like you might a [public module](https://registry.terraform.io/browse/modules). It is a baseline, something you can fork, potentially maintain, and modify to fit your organization's needs. Using public modules vs. writing your own has various [drivers and trade-offs](https://docs.osinfra.io/fundamentals/architecture-decision-records/adr-0003) that your organization should evaluate.
