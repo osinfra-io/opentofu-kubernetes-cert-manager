@@ -1,4 +1,7 @@
 app:
+  server:
+    clusterID: "plt-us-east1-b-sb"
+
   tls:
     rootCAFile: /var/run/secrets/istio-csr/ca.pem
 
@@ -17,8 +20,6 @@ resources:
     cpu: 25m
     memory: 32Mi
 
-server:
-  clusterID: "plt-us-east1-b-sb"
 volumes:
  - name: root-ca
    secret:
