@@ -1,0 +1,72 @@
+global:
+  commonLabels:
+    tags.datadoghq.com/service: cert-manager
+    tags.datadoghq.com/source: cert-manager
+
+crds:
+  enabled: true
+
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: 20m
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+image:
+  repository: quay.io/jetstack/cert-manager-controller
+
+webhook:
+  replicaCount: 1
+
+  image:
+    repository: quay.io/jetstack/cert-manager-webhook
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+cainjector:
+  replicaCount: 1
+
+  image:
+    repository: quay.io/jetstack/cert-manager-cainjector
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+acmesolver:
+  image:
+    repository: quay.io/jetstack/cert-manager-acmesolver
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+startupapicheck:
+  image:
+    repository: quay.io/jetstack/cert-manager-startupapicheck
+
+  resources:
+    limits:
+      cpu: 25m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
