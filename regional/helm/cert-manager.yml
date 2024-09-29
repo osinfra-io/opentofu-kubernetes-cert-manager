@@ -1,6 +1,5 @@
 global:
   commonLabels:
-    tags.datadoghq.com/service: cert-manager
     tags.datadoghq.com/source: cert-manager
 
 crds:

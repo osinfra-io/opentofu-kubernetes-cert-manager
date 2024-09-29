@@ -29,7 +29,7 @@ resource "helm_release" "cert_manager" {
 
   set {
     name  = "podLabels.tags\\.datadoghq\\.com/service"
-    value = "cert-manager-controller"
+    value = "cert-manager"
   }
 
   set {
