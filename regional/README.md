@@ -11,7 +11,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.14.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.15.0 |
 
 ## Modules
 
