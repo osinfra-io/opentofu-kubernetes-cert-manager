@@ -171,3 +171,95 @@ resource "kubernetes_manifest" "istio_gateway_selfsigned_issuer" {
     }
   }
 }
+
+resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Certificate"
+
+    metadata = {
+      name      = "opa-gatekeeper-ca"
+      namespace = "gatekeeper-system"
+    }
+
+    spec = {
+      commonName = "opa-gatekeeper-ca"
+      duration   = "2160h"
+      isCA       = true
+
+      issuerRef = {
+        name  = "selfsigned"
+        kind  = "Issuer"
+        group = "cert-manager.io"
+      }
+
+      privateKey = {
+        algorithm = "ECDSA"
+        size      = 256
+      }
+
+      secretName = "opa-gatekeeper-ca"
+
+      subject = {
+        organizations = ["opa-gatekeeper.osinfra.io"]
+      }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Issuer"
+
+    metadata = {
+      name      = "opa-gatekeeper-ca"
+      namespace = "gatekeeper-system"
+    }
+
+    spec = {
+      ca = {
+        secretName = "opa-gatekeeper-ca"
+      }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "opa_gatekeeper_tls" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Certificate"
+
+    metadata = {
+      name      = "opa-gatekeeper-tls"
+      namespace = "gatekeeper-system"
+    }
+
+    spec = {
+      commonName = "opa-gatekeeper.osinfra.io"
+
+      dnsNames = [
+        "gatekeeper-webhook-service",
+        "gatekeeper-webhook-service.gatekeeper-system",
+        "gatekeeper-webhook-service.gatekeeper-system.svc"
+      ]
+
+      duration = "2160h"
+      isCA     = false
+
+      issuerRef = {
+        name  = "opa-gatekeeper-ca"
+        kind  = "Issuer"
+        group = "cert-manager.io"
+      }
+
+      renewBefore = "360h"
+      secretName  = "opa-gatekeeper-tls"
+
+      usages = [
+        "client auth",
+        "server auth"
+      ]
+    }
+  }
+}
