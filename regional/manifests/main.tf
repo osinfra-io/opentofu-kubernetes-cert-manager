@@ -275,6 +275,8 @@ resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
 
       usages = [
         "client auth",
+        "digital signature",
+        "key encipherment",
         "server auth"
       ]
     }
