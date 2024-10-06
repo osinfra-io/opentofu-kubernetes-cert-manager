@@ -22,11 +22,6 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
         group = "cert-manager.io"
       }
 
-      privateKey = {
-        algorithm = "ECDSA"
-        size      = 256
-      }
-
       secretName = "istio-ca"
 
       subject = {
@@ -89,11 +84,6 @@ resource "kubernetes_manifest" "istio_gateway_ca_certificate" {
         name  = "selfsigned"
         kind  = "Issuer"
         group = "cert-manager.io"
-      }
-
-      privateKey = {
-        algorithm = "ECDSA"
-        size      = 256
       }
 
       secretName = "istio-gateway-ca"
@@ -178,6 +168,10 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
     kind       = "Certificate"
 
     metadata = {
+      labels = {
+        "gatekeeper.sh/system" = "yes"
+      }
+
       name      = "gatekeeper-ca"
       namespace = "gatekeeper-system"
     }
@@ -191,11 +185,6 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
         name  = "selfsigned"
         kind  = "Issuer"
         group = "cert-manager.io"
-      }
-
-      privateKey = {
-        algorithm = "ECDSA"
-        size      = 256
       }
 
       secretName = "gatekeeper-ca"
@@ -213,6 +202,10 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
     kind       = "Issuer"
 
     metadata = {
+      labels = {
+        "gatekeeper.sh/system" = "yes"
+      }
+
       name      = "gatekeeper-ca"
       namespace = "gatekeeper-system"
     }
@@ -231,6 +224,10 @@ resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
     kind       = "Issuer"
 
     metadata = {
+      labels = {
+        "gatekeeper.sh/system" = "yes"
+      }
+
       name      = "selfsigned"
       namespace = "gatekeeper-system"
     }
@@ -247,6 +244,10 @@ resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
     kind       = "Certificate"
 
     metadata = {
+      labels = {
+        "gatekeeper.sh/system" = "yes"
+      }
+
       name      = "gatekeeper-webhook-server-cert"
       namespace = "gatekeeper-system"
     }
