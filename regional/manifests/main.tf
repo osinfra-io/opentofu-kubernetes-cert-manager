@@ -225,13 +225,13 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
   }
 }
 
-resource "kubernetes_manifest" "opa_gatekeeper_tls" {
+resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
   manifest = {
     apiVersion = "cert-manager.io/v1"
     kind       = "Certificate"
 
     metadata = {
-      name      = "opa-gatekeeper-tls"
+      name      = "gatekeeper-webhook-server-cert"
       namespace = "gatekeeper-system"
     }
 
@@ -254,7 +254,7 @@ resource "kubernetes_manifest" "opa_gatekeeper_tls" {
       }
 
       renewBefore = "360h"
-      secretName  = "opa-gatekeeper-tls"
+      secretName  = "gatekeeper-webhook-server-cert"
 
       usages = [
         "client auth",
