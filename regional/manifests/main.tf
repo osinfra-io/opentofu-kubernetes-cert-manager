@@ -178,12 +178,12 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
     kind       = "Certificate"
 
     metadata = {
-      name      = "opa-gatekeeper-ca"
+      name      = "gatekeeper-ca"
       namespace = "gatekeeper-system"
     }
 
     spec = {
-      commonName = "opa-gatekeeper-ca"
+      commonName = "gatekeeper-ca.osinfra.io"
       duration   = "2160h"
       isCA       = true
 
@@ -198,10 +198,10 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
         size      = 256
       }
 
-      secretName = "opa-gatekeeper-ca"
+      secretName = "gatekeeper-ca"
 
       subject = {
-        organizations = ["opa-gatekeeper.osinfra.io"]
+        organizations = ["gatekeeper.osinfra.io"]
       }
     }
   }
@@ -213,14 +213,30 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
     kind       = "Issuer"
 
     metadata = {
-      name      = "opa-gatekeeper-ca"
+      name      = "gatekeeper-ca"
       namespace = "gatekeeper-system"
     }
 
     spec = {
       ca = {
-        secretName = "opa-gatekeeper-ca"
+        secretName = "gatekeeper-ca"
       }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Issuer"
+
+    metadata = {
+      name      = "selfsigned"
+      namespace = "gatekeeper-system"
+    }
+
+    spec = {
+      selfSigned = {}
     }
   }
 }
@@ -236,7 +252,7 @@ resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
     }
 
     spec = {
-      commonName = "opa-gatekeeper.osinfra.io"
+      commonName = "gatekeeper-webhook-service.osinfra.io"
 
       dnsNames = [
         "gatekeeper-webhook-service",
@@ -248,7 +264,7 @@ resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
       isCA     = false
 
       issuerRef = {
-        name  = "opa-gatekeeper-ca"
+        name  = "gatekeeper-ca"
         kind  = "Issuer"
         group = "cert-manager.io"
       }
