@@ -27,7 +27,7 @@ variable "environment" {
 variable "cert_manager_version" {
   description = "The version to install, this is used for the chart as well as the image tag"
   type        = string
-  default     = "1.15.3"
+  default     = "1.16.1"
 }
 
 variable "node_location" {
