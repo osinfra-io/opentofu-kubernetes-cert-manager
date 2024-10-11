@@ -1,284 +1,284 @@
-# Kubernetes Manifest Resource
-# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest
+# # Kubernetes Manifest Resource
+# # https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest
 
-resource "kubernetes_manifest" "istio_ca_certificate" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Certificate"
+# resource "kubernetes_manifest" "istio_ca_certificate" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Certificate"
 
-    metadata = {
-      name      = "istio-ca"
-      namespace = "istio-system"
-    }
+#     metadata = {
+#       name      = "istio-ca"
+#       namespace = "istio-system"
+#     }
 
-    spec = {
-      commonName = "istio-ca"
-      duration   = "2160h"
-      isCA       = true
+#     spec = {
+#       commonName = "istio-ca"
+#       duration   = "2160h"
+#       isCA       = true
 
-      issuerRef = {
-        name  = "selfsigned"
-        kind  = "Issuer"
-        group = "cert-manager.io"
-      }
+#       issuerRef = {
+#         name  = "selfsigned"
+#         kind  = "Issuer"
+#         group = "cert-manager.io"
+#       }
 
-      secretName = "istio-ca"
+#       secretName = "istio-ca"
 
-      subject = {
-        organizations = ["istio.osinfra.io"]
-      }
-    }
-  }
-}
+#       subject = {
+#         organizations = ["istio.osinfra.io"]
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_ca_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "istio_ca_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      name      = "istio-ca"
-      namespace = "istio-system"
-    }
+#     metadata = {
+#       name      = "istio-ca"
+#       namespace = "istio-system"
+#     }
 
-    spec = {
-      ca = {
-        secretName = "istio-ca"
-      }
-    }
-  }
-}
+#     spec = {
+#       ca = {
+#         secretName = "istio-ca"
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_selfsigned_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "istio_selfsigned_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      name      = "selfsigned"
-      namespace = "istio-system"
-    }
+#     metadata = {
+#       name      = "selfsigned"
+#       namespace = "istio-system"
+#     }
 
-    spec = {
-      selfSigned = {}
-    }
-  }
-}
+#     spec = {
+#       selfSigned = {}
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_gateway_ca_certificate" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Certificate"
+# resource "kubernetes_manifest" "istio_gateway_ca_certificate" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Certificate"
 
-    metadata = {
-      name      = "istio-gateway-ca"
-      namespace = "istio-ingress"
-    }
+#     metadata = {
+#       name      = "istio-gateway-ca"
+#       namespace = "istio-ingress"
+#     }
 
-    spec = {
-      commonName = "istio-gateway-ca"
-      duration   = "2160h"
-      isCA       = true
+#     spec = {
+#       commonName = "istio-gateway-ca"
+#       duration   = "2160h"
+#       isCA       = true
 
-      issuerRef = {
-        name  = "selfsigned"
-        kind  = "Issuer"
-        group = "cert-manager.io"
-      }
+#       issuerRef = {
+#         name  = "selfsigned"
+#         kind  = "Issuer"
+#         group = "cert-manager.io"
+#       }
 
-      secretName = "istio-gateway-ca"
+#       secretName = "istio-gateway-ca"
 
-      subject = {
-        organizations = ["istio.osinfra.io"]
-      }
-    }
-  }
-}
+#       subject = {
+#         organizations = ["istio.osinfra.io"]
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_gateway_ca_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "istio_gateway_ca_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      name      = "istio-gateway-ca"
-      namespace = "istio-ingress"
-    }
+#     metadata = {
+#       name      = "istio-gateway-ca"
+#       namespace = "istio-ingress"
+#     }
 
-    spec = {
-      ca = {
-        secretName = "istio-gateway-ca"
-      }
-    }
-  }
-}
+#     spec = {
+#       ca = {
+#         secretName = "istio-gateway-ca"
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_gateway_tls" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Certificate"
+# resource "kubernetes_manifest" "istio_gateway_tls" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Certificate"
 
-    metadata = {
-      name      = "istio-gateway-tls"
-      namespace = "istio-ingress"
-    }
+#     metadata = {
+#       name      = "istio-gateway-tls"
+#       namespace = "istio-ingress"
+#     }
 
-    spec = {
-      commonName = "istio-gateway.osinfra.io"
-      dnsNames   = ["*"]
-      duration   = "2160h"
-      isCA       = false
+#     spec = {
+#       commonName = "istio-gateway.osinfra.io"
+#       dnsNames   = ["*"]
+#       duration   = "2160h"
+#       isCA       = false
 
-      issuerRef = {
-        name  = "istio-gateway-ca"
-        kind  = "Issuer"
-        group = "cert-manager.io"
-      }
+#       issuerRef = {
+#         name  = "istio-gateway-ca"
+#         kind  = "Issuer"
+#         group = "cert-manager.io"
+#       }
 
-      renewBefore = "360h"
-      secretName  = "istio-gateway-tls"
+#       renewBefore = "360h"
+#       secretName  = "istio-gateway-tls"
 
-      usages = [
-        "client auth",
-        "server auth"
-      ]
-    }
-  }
-}
+#       usages = [
+#         "client auth",
+#         "server auth"
+#       ]
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "istio_gateway_selfsigned_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "istio_gateway_selfsigned_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      name      = "selfsigned"
-      namespace = "istio-ingress"
-    }
+#     metadata = {
+#       name      = "selfsigned"
+#       namespace = "istio-ingress"
+#     }
 
-    spec = {
-      selfSigned = {}
-    }
-  }
-}
+#     spec = {
+#       selfSigned = {}
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Certificate"
+# resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Certificate"
 
-    metadata = {
-      labels = {
-        "gatekeeper.sh/system" = "yes"
-      }
+#     metadata = {
+#       labels = {
+#         "gatekeeper.sh/system" = "yes"
+#       }
 
-      name      = "gatekeeper-ca"
-      namespace = "gatekeeper-system"
-    }
+#       name      = "gatekeeper-ca"
+#       namespace = "gatekeeper-system"
+#     }
 
-    spec = {
-      commonName = "gatekeeper-ca.osinfra.io"
-      duration   = "2160h"
-      isCA       = true
+#     spec = {
+#       commonName = "gatekeeper-ca.osinfra.io"
+#       duration   = "2160h"
+#       isCA       = true
 
-      issuerRef = {
-        name  = "selfsigned"
-        kind  = "Issuer"
-        group = "cert-manager.io"
-      }
+#       issuerRef = {
+#         name  = "selfsigned"
+#         kind  = "Issuer"
+#         group = "cert-manager.io"
+#       }
 
-      secretName = "gatekeeper-ca"
+#       secretName = "gatekeeper-ca"
 
-      subject = {
-        organizations = ["gatekeeper.osinfra.io"]
-      }
-    }
-  }
-}
+#       subject = {
+#         organizations = ["gatekeeper.osinfra.io"]
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      labels = {
-        "gatekeeper.sh/system" = "yes"
-      }
+#     metadata = {
+#       labels = {
+#         "gatekeeper.sh/system" = "yes"
+#       }
 
-      name      = "gatekeeper-ca"
-      namespace = "gatekeeper-system"
-    }
+#       name      = "gatekeeper-ca"
+#       namespace = "gatekeeper-system"
+#     }
 
-    spec = {
-      ca = {
-        secretName = "gatekeeper-ca"
-      }
-    }
-  }
-}
+#     spec = {
+#       ca = {
+#         secretName = "gatekeeper-ca"
+#       }
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+# resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Issuer"
 
-    metadata = {
-      labels = {
-        "gatekeeper.sh/system" = "yes"
-      }
+#     metadata = {
+#       labels = {
+#         "gatekeeper.sh/system" = "yes"
+#       }
 
-      name      = "selfsigned"
-      namespace = "gatekeeper-system"
-    }
+#       name      = "selfsigned"
+#       namespace = "gatekeeper-system"
+#     }
 
-    spec = {
-      selfSigned = {}
-    }
-  }
-}
+#     spec = {
+#       selfSigned = {}
+#     }
+#   }
+# }
 
-resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Certificate"
+# resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
+#   manifest = {
+#     apiVersion = "cert-manager.io/v1"
+#     kind       = "Certificate"
 
-    metadata = {
-      labels = {
-        "gatekeeper.sh/system" = "yes"
-      }
+#     metadata = {
+#       labels = {
+#         "gatekeeper.sh/system" = "yes"
+#       }
 
-      name      = "gatekeeper-webhook-server-cert"
-      namespace = "gatekeeper-system"
-    }
+#       name      = "gatekeeper-webhook-server-cert"
+#       namespace = "gatekeeper-system"
+#     }
 
-    spec = {
-      commonName = "gatekeeper-webhook-service.osinfra.io"
+#     spec = {
+#       commonName = "gatekeeper-webhook-service.osinfra.io"
 
-      dnsNames = [
-        "gatekeeper-webhook-service",
-        "gatekeeper-webhook-service.gatekeeper-system",
-        "gatekeeper-webhook-service.gatekeeper-system.svc"
-      ]
+#       dnsNames = [
+#         "gatekeeper-webhook-service",
+#         "gatekeeper-webhook-service.gatekeeper-system",
+#         "gatekeeper-webhook-service.gatekeeper-system.svc"
+#       ]
 
-      duration = "2160h"
-      isCA     = false
+#       duration = "2160h"
+#       isCA     = false
 
-      issuerRef = {
-        name  = "gatekeeper-ca"
-        kind  = "Issuer"
-        group = "cert-manager.io"
-      }
+#       issuerRef = {
+#         name  = "gatekeeper-ca"
+#         kind  = "Issuer"
+#         group = "cert-manager.io"
+#       }
 
-      renewBefore = "360h"
-      secretName  = "gatekeeper-webhook-server-cert"
+#       renewBefore = "360h"
+#       secretName  = "gatekeeper-webhook-server-cert"
 
-      usages = [
-        "client auth",
-        "digital signature",
-        "key encipherment",
-        "server auth"
-      ]
-    }
-  }
-}
+#       usages = [
+#         "client auth",
+#         "digital signature",
+#         "key encipherment",
+#         "server auth"
+#       ]
+#     }
+#   }
+# }
