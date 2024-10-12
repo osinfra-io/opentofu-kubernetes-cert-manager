@@ -8,11 +8,6 @@ resource "helm_release" "cert_manager" {
   repository = var.chart_repository
 
   set {
-    name  = "acmesolver.podLabels.tags\\.datadoghq\\.com/service"
-    value = "cert-manager-acmesolver"
-  }
-
-  set {
     name  = "cainjector.podLabels.tags\\.datadoghq\\.com/service"
     value = "cert-manager-cainjector"
   }

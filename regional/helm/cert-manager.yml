@@ -50,14 +50,6 @@ acmesolver:
   image:
     repository: quay.io/jetstack/cert-manager-acmesolver
 
-  resources:
-    limits:
-      cpu: 25m
-      memory: 64Mi
-    requests:
-      cpu: 10m
-      memory: 32Mi
-
 startupapicheck:
   image:
     repository: quay.io/jetstack/cert-manager-startupapicheck
