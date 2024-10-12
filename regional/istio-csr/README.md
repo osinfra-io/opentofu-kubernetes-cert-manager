@@ -12,6 +12,7 @@ No requirements.
 | Name | Version |
 |------|---------|
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.16.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.33.0 |
 
 ## Modules
 
@@ -22,6 +23,9 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.cert_manager_istio_csr](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_manifest.istio_ca_certificate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.istio_ca_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.istio_selfsigned_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 
 ## Inputs
 
@@ -30,9 +34,14 @@ No modules.
 | <a name="input_artifact_registry"></a> [artifact\_registry](#input\_artifact\_registry) | The registry to pull the images from | `string` | `"us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"` | no |
 | <a name="input_cert_manager_istio_csr_version"></a> [cert\_manager\_istio\_csr\_version](#input\_cert\_manager\_istio\_csr\_version) | The version to install for the Istio CSR, this is used for the chart as well as the image tag | `string` | `"0.12.0"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | The repository to pull the cert-manager Helm chart from | `string` | `"https://charts.jetstack.io"` | no |
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | The cluster ID to use for the Istio CSR | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment must be one of `sandbox`, `non-production`, `production` | `string` | `"sandbox"` | no |
 | <a name="input_node_location"></a> [node\_location](#input\_node\_location) | The zone in which the cluster's nodes should be located. If not specified, the cluster's nodes are located across zones in the region | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | The region in which the resource belongs | `string` | n/a | yes |
+| <a name="input_resources_limits_cpu"></a> [resources\_limits\_cpu](#input\_resources\_limits\_cpu) | The CPU limit for the Istio CSR container | `string` | `"50m"` | no |
+| <a name="input_resources_limits_memory"></a> [resources\_limits\_memory](#input\_resources\_limits\_memory) | The memory limit for the Istio CSR container | `string` | `"64Mi"` | no |
+| <a name="input_resources_requests_cpu"></a> [resources\_requests\_cpu](#input\_resources\_requests\_cpu) | The CPU request for the Istio CSR container | `string` | `"25m"` | no |
+| <a name="input_resources_requests_memory"></a> [resources\_requests\_memory](#input\_resources\_requests\_memory) | The memory request for the Istio CSR container | `string` | `"32Mi"` | no |
 
 ## Outputs
 

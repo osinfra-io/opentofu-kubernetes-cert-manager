@@ -64,6 +64,7 @@ module "test" {
   source = "../../../../../regional/istio-csr"
 
   artifact_registry = "mock-docker.pkg.dev/mock-project/mock-virtual"
+  cluster_id        = "mock-cluster"
   environment       = var.environment
   region            = var.region
 }
