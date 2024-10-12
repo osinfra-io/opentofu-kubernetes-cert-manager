@@ -88,6 +88,9 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
 }
 
 resource "kubernetes_manifest" "istio_ca_issuer" {
+  depends_on = [
+    kubernetes_manifest.istio_ca_certificate
+  ]
   manifest = {
     apiVersion = "cert-manager.io/v1"
     kind       = "Issuer"
