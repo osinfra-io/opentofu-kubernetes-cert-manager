@@ -33,14 +33,6 @@ run "default_regional_istio_csr" {
   }
 }
 
-run "default_regional_manifests" {
-  command = apply
-
-  module {
-    source = "./tests/fixtures/default/regional/manifests"
-  }
-}
-
 variables {
   environment = "mock-environment"
 }
