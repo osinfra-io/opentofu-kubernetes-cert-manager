@@ -15,10 +15,6 @@ run "default_regional" {
   module {
     source = "./tests/fixtures/default/regional"
   }
-
-  variables {
-    region                      = "mock-region-a"
-  }
 }
 
 run "default_regional_istio_csr" {
@@ -27,12 +23,4 @@ run "default_regional_istio_csr" {
   module {
     source = "./tests/fixtures/default/regional/istio-csr"
   }
-
-  variables {
-    region                      = "mock-region-a"
-  }
-}
-
-variables {
-  environment = "mock-environment"
 }
