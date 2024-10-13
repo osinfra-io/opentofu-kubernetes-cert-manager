@@ -67,4 +67,3 @@ terraform test
 
 - [regional](regional/README.md)
 - [regional/istio-csr](regional/istio-csr/README.md)
-- [regional/manifests](regional/manifests/README.md)

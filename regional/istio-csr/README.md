@@ -35,9 +35,6 @@ No modules.
 | <a name="input_cert_manager_istio_csr_version"></a> [cert\_manager\_istio\_csr\_version](#input\_cert\_manager\_istio\_csr\_version) | The version to install for the Istio CSR, this is used for the chart as well as the image tag | `string` | `"0.12.0"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | The repository to pull the cert-manager Helm chart from | `string` | `"https://charts.jetstack.io"` | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | The cluster ID to use for the Istio CSR | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment must be one of `sandbox`, `non-production`, `production` | `string` | `"sandbox"` | no |
-| <a name="input_node_location"></a> [node\_location](#input\_node\_location) | The zone in which the cluster's nodes should be located. If not specified, the cluster's nodes are located across zones in the region | `string` | `null` | no |
-| <a name="input_region"></a> [region](#input\_region) | The region in which the resource belongs | `string` | n/a | yes |
 | <a name="input_resources_limits_cpu"></a> [resources\_limits\_cpu](#input\_resources\_limits\_cpu) | The CPU limit for the Istio CSR container | `string` | `"50m"` | no |
 | <a name="input_resources_limits_memory"></a> [resources\_limits\_memory](#input\_resources\_limits\_memory) | The memory limit for the Istio CSR container | `string` | `"64Mi"` | no |
 | <a name="input_resources_requests_cpu"></a> [resources\_requests\_cpu](#input\_resources\_requests\_cpu) | The CPU request for the Istio CSR container | `string` | `"25m"` | no |

@@ -7,44 +7,12 @@ resource "helm_release" "cert_manager_istio_csr" {
   namespace  = "cert-manager"
   repository = var.chart_repository
 
-  set {
-    name  = "app.server.clusterID"
-    value = var.cluster_id
-  }
-
-  set {
-    name  = "podLabels.tags\\.datadoghq\\.com/env"
-    value = var.environment
-  }
-
-  set {
-    name  = "podLabels.tags\\.datadoghq\\.com/version"
-    value = var.cert_manager_istio_csr_version
-  }
-
-  set {
-    name  = "podLabels.tags\\.datadoghq\\.com/service"
-    value = "cert-manager-istio-csr"
-  }
-
-  set {
-    name  = "resources.limits.cpu"
-    value = var.resources_limits_cpu
-  }
-
-  set {
-    name  = "resources.limits.memory"
-    value = var.resources_limits_memory
-  }
-
-  set {
-    name  = "resources.requests.cpu"
-    value = var.resources_requests_cpu
-  }
-
-  set {
-    name  = "resources.requests.memory"
-    value = var.resources_requests_memory
+  dynamic "set" {
+    for_each = local.helm_values
+    content {
+      name  = set.key
+      value = set.value
+    }
   }
 
   values = [
