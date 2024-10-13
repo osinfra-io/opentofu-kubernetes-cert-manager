@@ -7,6 +7,12 @@ variable "artifact_registry" {
   default     = "us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"
 }
 
+variable "cain_injector_replicas" {
+  description = "The number of replicas to run for the cain-injector"
+  type        = number
+  default     = 1
+}
+
 variable "cain_injector_resources_limits_cpu" {
   description = "The CPU limit for the cain-injector resources"
   type        = string
@@ -31,10 +37,10 @@ variable "cain_injector_resources_requests_memory" {
   default     = "32Mi"
 }
 
-variable "cain_injector_replicas" {
-  description = "The number of replicas to run for the cain-injector"
-  type        = number
-  default     = 1
+variable "cert_manager_version" {
+  description = "The version to install, this is used for the chart as well as the image tag"
+  type        = string
+  default     = "1.16.1"
 }
 
 variable "chart_repository" {
@@ -43,10 +49,10 @@ variable "chart_repository" {
   default     = "https://charts.jetstack.io"
 }
 
-variable "cert_manager_version" {
-  description = "The version to install, this is used for the chart as well as the image tag"
-  type        = string
-  default     = "1.16.1"
+variable "replicas" {
+  description = "The number of replicas to run"
+  type        = number
+  default     = 1
 }
 
 variable "resources_limits_cpu" {
@@ -73,12 +79,6 @@ variable "resources_requests_memory" {
   default     = "32Mi"
 }
 
-variable "replicas" {
-  description = "The number of replicas to run"
-  type        = number
-  default     = 1
-}
-
 variable "startupapicheck_resources_limits_cpu" {
   description = "The CPU limit for the startupapicheck resources"
   type        = string
@@ -103,6 +103,12 @@ variable "startupapicheck_resources_requests_memory" {
   default     = "32Mi"
 }
 
+variable "webhook_replicas" {
+  description = "The number of replicas to run for the webhook"
+  type        = number
+  default     = 1
+}
+
 variable "webhook_resources_limits_cpu" {
   description = "The CPU limit for the webhook resources"
   type        = string
@@ -125,10 +131,4 @@ variable "webhook_resources_requests_memory" {
   description = "The memory request for the webhook resources"
   type        = string
   default     = "32Mi"
-}
-
-variable "webhook_replicas" {
-  description = "The number of replicas to run for the webhook"
-  type        = number
-  default     = 1
 }
