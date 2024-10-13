@@ -22,7 +22,7 @@ locals {
     "cainjector.resources.limits.memory"                       = var.cain_injector_resources_limits_memory
     "cainjector.resources.requests.cpu"                        = var.cain_injector_resources_requests_cpu
     "cainjector.resources.requests.memory"                     = var.cain_injector_resources_requests_memory
-    "cainjector.replicas"                                      = var.cain_injector_replicas
+    "cainjector.replicaCount"                                  = var.cain_injector_replicas
     "global.commonLabels.tags\\.datadoghq\\.com/env"           = local.environment
     "global.commonLabels.tags\\.datadoghq\\.com/version"       = var.cert_manager_version
     "podLabels.tags\\.datadoghq\\.com/service"                 = "cert-manager"
@@ -30,7 +30,7 @@ locals {
     "resources.limits.memory"                                  = var.resources_limits_memory
     "resources.requests.cpu"                                   = var.resources_requests_cpu
     "resources.requests.memory"                                = var.resources_requests_memory
-    "replicas"                                                 = var.replicas
+    "replicaCount"                                             = var.replicas
     "startupapicheck.podLabels.tags\\.datadoghq\\.com/service" = "cert-manager-startupapicheck"
     "startupapicheck.resources.limits.cpu"                     = var.startupapicheck_resources_limits_cpu
     "startupapicheck.resources.limits.memory"                  = var.startupapicheck_resources_limits_memory
@@ -41,6 +41,6 @@ locals {
     "webhook.resources.limits.memory"                          = var.webhook_resources_limits_memory
     "webhook.resources.requests.cpu"                           = var.webhook_resources_requests_cpu
     "webhook.resources.requests.memory"                        = var.webhook_resources_requests_memory
-    "webhook.replicas"                                         = var.webhook_replicas
+    "webhook.replicaCount"                                     = var.webhook_replicas
   }
 }
