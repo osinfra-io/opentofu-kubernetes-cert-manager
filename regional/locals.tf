@@ -2,20 +2,6 @@
 # https://www.terraform.io/docs/language/values/locals.html
 
 locals {
-  env = lookup(local.env_map, local.environment, "none")
-
-  environment = (
-    terraform.workspace == "default" ?
-    "mock-environment" :
-    regex(".*-(?P<environment>[^-]+)$", terraform.workspace)["environment"]
-  )
-
-  env_map = {
-    "non-production" = "nonprod"
-    "production"     = "prod"
-    "sandbox"        = "sb"
-  }
-
   helm_values = {
     "cainjector.podLabels.tags\\.datadoghq\\.com/service"      = "cert-manager-cainjector"
     "cainjector.resources.limits.cpu"                          = var.cain_injector_resources_limits_cpu
@@ -23,7 +9,7 @@ locals {
     "cainjector.resources.requests.cpu"                        = var.cain_injector_resources_requests_cpu
     "cainjector.resources.requests.memory"                     = var.cain_injector_resources_requests_memory
     "cainjector.replicaCount"                                  = var.cain_injector_replicas
-    "global.commonLabels.tags\\.datadoghq\\.com/env"           = local.environment
+    "global.commonLabels.tags\\.datadoghq\\.com/env"           = module.helpers.environment
     "global.commonLabels.tags\\.datadoghq\\.com/version"       = var.cert_manager_version
     "podLabels.tags\\.datadoghq\\.com/service"                 = "cert-manager"
     "resources.limits.cpu"                                     = var.resources_limits_cpu

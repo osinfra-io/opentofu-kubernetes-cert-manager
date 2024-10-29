@@ -11,11 +11,13 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.16.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.16.1 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_helpers"></a> [helpers](#module\_helpers) | github.com/osinfra-io/terraform-core-helpers | v0.1.0 |
 
 ## Resources
 
@@ -35,6 +37,11 @@ No modules.
 | <a name="input_cain_injector_resources_requests_memory"></a> [cain\_injector\_resources\_requests\_memory](#input\_cain\_injector\_resources\_requests\_memory) | The memory request for the cain-injector resources | `string` | `"32Mi"` | no |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | The version to install, this is used for the chart as well as the image tag | `string` | `"1.16.1"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | The repository to pull the cert-manager Helm chart from | `string` | `"https://charts.jetstack.io"` | no |
+| <a name="input_helpers_cost_center"></a> [helpers\_cost\_center](#input\_helpers\_cost\_center) | The cost center the resources will be billed to, must start with 'x' followed by three or four digits | `string` | n/a | yes |
+| <a name="input_helpers_data_classification"></a> [helpers\_data\_classification](#input\_helpers\_data\_classification) | The data classification of the resources can be public, internal, or confidential | `string` | n/a | yes |
+| <a name="input_helpers_email"></a> [helpers\_email](#input\_helpers\_email) | The email address of the team responsible for the resources | `string` | n/a | yes |
+| <a name="input_helpers_repository"></a> [helpers\_repository](#input\_helpers\_repository) | The repository name (should be in the format 'owner/repo' containing only lowercase alphanumeric characters or hyphens) | `string` | n/a | yes |
+| <a name="input_helpers_team"></a> [helpers\_team](#input\_helpers\_team) | The team name (should contain only lowercase alphanumeric characters and hyphens) | `string` | n/a | yes |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | The number of replicas to run | `number` | `1` | no |
 | <a name="input_resources_limits_cpu"></a> [resources\_limits\_cpu](#input\_resources\_limits\_cpu) | The CPU limit for the resources | `string` | `"20m"` | no |
 | <a name="input_resources_limits_memory"></a> [resources\_limits\_memory](#input\_resources\_limits\_memory) | The memory limit for the resources | `string` | `"64Mi"` | no |
