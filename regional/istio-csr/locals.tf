@@ -3,19 +3,6 @@
 
 locals {
   cluster_id = local.zone != null ? "${var.cluster_prefix}-${local.region}-${local.zone}-${local.env}" : "${var.cluster_prefix}-${local.region}-${local.env}"
-  env        = lookup(local.env_map, local.environment, "none")
-
-  environment = (
-    terraform.workspace == "default" ?
-    "mock-environment" :
-    regex(".*-(?P<environment>[^-]+)$", terraform.workspace)["environment"]
-  )
-
-  env_map = {
-    "non-production" = "nonprod"
-    "production"     = "prod"
-    "sandbox"        = "sb"
-  }
 
   helm_values = {
     "app.server.clusterID"                     = local.cluster_id
@@ -26,21 +13,4 @@ locals {
     "resources.requests.cpu"                   = var.resources_requests_cpu
     "resources.requests.memory"                = var.resources_requests_memory
   }
-
-  region = (
-    terraform.workspace == "default" ?
-    "mock-region" :
-    regex("^(?P<region>[^-]+-[^-]+)", terraform.workspace)["region"]
-  )
-
-
-  zone = (
-    terraform.workspace == "default" ?
-    "mock-zone" :
-    (
-      regex("^(?P<region>[^-]+-[^-]+)(?:-(?P<zone>[^-]+))?-.*$", terraform.workspace)["zone"] != "" ?
-      regex("^(?P<region>[^-]+-[^-]+)(?:-(?P<zone>[^-]+))?-.*$", terraform.workspace)["zone"] :
-      null
-    )
-  )
 }
