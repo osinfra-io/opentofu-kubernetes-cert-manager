@@ -2,11 +2,11 @@
 # https://www.terraform.io/docs/language/values/locals.html
 
 locals {
-  cluster_id = local.zone != null ? "${var.cluster_prefix}-${local.region}-${local.zone}-${local.env}" : "${var.cluster_prefix}-${local.region}-${local.env}"
+  cluster_id = module.helpers.zone != null ? "${var.cluster_prefix}-${module.helpers.region}-${module.helpers.zone}-${module.helpers.env}" : "${var.cluster_prefix}-${module.helpers.region}-${module.helpers.env}"
 
   helm_values = {
     "app.server.clusterID"                     = local.cluster_id
-    "podLabels.tags\\.datadoghq\\.com/env"     = local.environment
+    "podLabels.tags\\.datadoghq\\.com/env"     = module.helpers.environment
     "podLabels.tags\\.datadoghq\\.com/version" = var.cert_manager_istio_csr_version
     "resources.limits.cpu"                     = var.resources_limits_cpu
     "resources.limits.memory"                  = var.resources_limits_memory
