@@ -1,6 +1,6 @@
+crds:
+  enabled: true
+
 global:
   commonLabels:
     tags.datadoghq.com/source: cert-manager
-
-crds:
-  enabled: true
