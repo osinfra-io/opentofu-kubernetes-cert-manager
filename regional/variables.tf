@@ -40,7 +40,7 @@ variable "cain_injector_resources_requests_memory" {
 variable "cert_manager_version" {
   description = "The version to install, this is used for the chart as well as the image tag"
   type        = string
-  default     = "1.16.1"
+  default     = "1.16.2"
 }
 
 variable "chart_repository" {
