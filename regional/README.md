@@ -35,7 +35,7 @@ No requirements.
 | <a name="input_cain_injector_resources_limits_memory"></a> [cain\_injector\_resources\_limits\_memory](#input\_cain\_injector\_resources\_limits\_memory) | The memory limit for the cain-injector resources | `string` | `"64Mi"` | no |
 | <a name="input_cain_injector_resources_requests_cpu"></a> [cain\_injector\_resources\_requests\_cpu](#input\_cain\_injector\_resources\_requests\_cpu) | The CPU request for the cain-injector resources | `string` | `"10m"` | no |
 | <a name="input_cain_injector_resources_requests_memory"></a> [cain\_injector\_resources\_requests\_memory](#input\_cain\_injector\_resources\_requests\_memory) | The memory request for the cain-injector resources | `string` | `"32Mi"` | no |
-| <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | The version to install, this is used for the chart as well as the image tag | `string` | `"1.16.1"` | no |
+| <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | The version to install, this is used for the chart as well as the image tag | `string` | `"1.16.3"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | The repository to pull the cert-manager Helm chart from | `string` | `"https://charts.jetstack.io"` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | The number of replicas to run | `number` | `1` | no |
 | <a name="input_resources_limits_cpu"></a> [resources\_limits\_cpu](#input\_resources\_limits\_cpu) | The CPU limit for the resources | `string` | `"20m"` | no |
