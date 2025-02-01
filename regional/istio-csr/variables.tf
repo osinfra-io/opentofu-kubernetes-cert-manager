@@ -47,3 +47,14 @@ variable "resources_requests_memory" {
   type        = string
   default     = "32Mi"
 }
+
+variable "tls_self_signed_cert_cert_manager_root_cert" {
+  description = "The self-signed certificate for the cert-manager root certificate"
+  type        = string
+}
+
+variable "tls_self_signed_cert_cert_manager_root_key" {
+  description = "The private key for the cert-manager root certificate"
+  type        = string
+  sensitive   = true
+}

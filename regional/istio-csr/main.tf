@@ -41,7 +41,7 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
       isCA       = true
 
       issuerRef = {
-        name  = kubernetes_manifest.istio_selfsigned_issuer.manifest.metadata.name
+        name  = "cert-manager-root"
         kind  = "Issuer"
         group = "cert-manager.io"
       }
@@ -76,18 +76,14 @@ resource "kubernetes_manifest" "istio_ca_issuer" {
   }
 }
 
-resource "kubernetes_manifest" "istio_selfsigned_issuer" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "Issuer"
+resource "kubernetes_secret_v1" "istio_ca" {
+  metadata {
+    name      = "istio-ca"
+    namespace = "istio-system"
+  }
 
-    metadata = {
-      name      = "selfsigned"
-      namespace = "istio-system"
-    }
-
-    spec = {
-      selfSigned = {}
-    }
+  data = {
+    "tls.cert" = var.tls_self_signed_cert_cert_manager_root_cert
+    "tls.key"  = var.tls_self_signed_cert_cert_manager_root_key
   }
 }
