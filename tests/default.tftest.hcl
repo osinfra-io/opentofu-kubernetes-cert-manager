@@ -9,6 +9,14 @@ mock_provider "helm" {}
 mock_provider "kubernetes" {}
 mock_provider "terraform" {}
 
+run "default" {
+  command = apply
+
+  module {
+    source = "./tests/fixtures/default"
+  }
+}
+
 run "default_regional" {
   command = apply
 

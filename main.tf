@@ -1,0 +1,25 @@
+# TLS Private Key Resource
+# https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key
+
+resource "tls_private_key" "cert_manager_root" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# TLS Self-Signed Certificate Resource
+# https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert
+
+resource "tls_self_signed_cert" "cert_manager_root" {
+  private_key_pem = tls_private_key.cert_manager_root.private_key_pem
+
+  subject {
+    common_name  = "root.cert-manager.osinfra.io"
+    organization = "Open Source Infrastructure (as Code) LLC"
+  }
+
+  validity_period_hours = 262980
+
+  allowed_uses = [
+    "cert_signing"
+  ]
+}
