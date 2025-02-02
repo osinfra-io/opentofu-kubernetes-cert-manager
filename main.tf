@@ -10,7 +10,12 @@ resource "tls_private_key" "cert_manager_root" {
 # https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert
 
 resource "tls_self_signed_cert" "cert_manager_root" {
-  private_key_pem = tls_private_key.cert_manager_root.private_key_pem
+  allowed_uses = [
+    "cert_signing"
+  ]
+
+  is_ca_certificate = true
+  private_key_pem   = tls_private_key.cert_manager_root.private_key_pem
 
   subject {
     common_name  = "root.cert-manager.osinfra.io"
@@ -18,8 +23,4 @@ resource "tls_self_signed_cert" "cert_manager_root" {
   }
 
   validity_period_hours = 262980
-
-  allowed_uses = [
-    "cert_signing"
-  ]
 }
