@@ -3,7 +3,7 @@
 
 resource "tls_private_key" "cert_manager_root" {
   algorithm   = "ECDSA"
-  ecdsa_curve = "P256"
+  ecdsa_curve = "P384"
 }
 
 # TLS Self-Signed Certificate Resource
@@ -19,7 +19,7 @@ resource "tls_self_signed_cert" "cert_manager_root" {
 
   subject {
     common_name  = "root.cert-manager.osinfra.io"
-    organization = "Open Source Infrastructure (as Code) LLC"
+    organization = "Open Source Infrastructure (as Code) - cert-manager"
   }
 
   validity_period_hours = 262980
