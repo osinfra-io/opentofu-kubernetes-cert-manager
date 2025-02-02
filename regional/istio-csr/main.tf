@@ -80,7 +80,7 @@ resource "kubernetes_secret_v1" "istio_ca" {
   }
 
   data = {
-    "tls.cert" = var.tls_self_signed_cert_cert_manager_root_cert
-    "tls.key"  = var.tls_self_signed_cert_cert_manager_root_key
+    "tls.crt" = var.tls_self_signed_cert_cert_manager_root_cert
+    "tls.key" = var.tls_self_signed_cert_cert_manager_root_key
   }
 }
