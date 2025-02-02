@@ -37,16 +37,16 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
 
     spec = {
       commonName = "istio-ca"
-      duration   = "2160h"
+      duration   = "720h"
       isCA       = true
 
       issuerRef = {
-        name  = kubernetes_manifest.istio_ca_issuer.manifest.metadata.name
+        name  = kubernetes_manifest.istio_intermediate_ca_issuer.manifest.metadata.name
         kind  = "Issuer"
         group = "cert-manager.io"
       }
 
-      secretName = "cacert"
+      secretName = "istio-ca"
 
       subject = {
         organizations = ["istio.osinfra.io"]
@@ -73,9 +73,27 @@ resource "kubernetes_manifest" "istio_ca_issuer" {
   }
 }
 
-resource "kubernetes_secret_v1" "istio_ca" {
+resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Issuer"
+
+    metadata = {
+      name      = "istio-intermediate-ca"
+      namespace = "istio-system"
+    }
+
+    spec = {
+      ca = {
+        secretName = "istio-cert-manager-ca"
+      }
+    }
+  }
+}
+
+resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
   metadata {
-    name      = "istio-ca"
+    name      = "istio-cert-manager-ca"
     namespace = "istio-system"
   }
 
