@@ -2,8 +2,8 @@
 # https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key
 
 resource "tls_private_key" "cert_manager_root" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
+  algorithm   = "ECDSA"
+  ecdsa_curve = "P256"
 }
 
 # TLS Self-Signed Certificate Resource
