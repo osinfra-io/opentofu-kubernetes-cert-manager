@@ -22,38 +22,8 @@ resource "helm_release" "cert_manager_istio_csr" {
   version = var.cert_manager_istio_csr_version
 }
 
-# # Kubernetes Manifest Resource
-# # https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest
-
-# resource "kubernetes_manifest" "istio_ca_certificate" {
-#   manifest = {
-#     apiVersion = "cert-manager.io/v1"
-#     kind       = "Certificate"
-
-#     metadata = {
-#       name      = "istio-ca"
-#       namespace = "istio-system"
-#     }
-
-#     spec = {
-#       commonName = "istio-ca"
-#       duration   = "2160h"
-#       isCA       = true
-
-#       issuerRef = {
-#         name  = "cert-manager-root"
-#         kind  = "Issuer"
-#         group = "cert-manager.io"
-#       }
-
-#       secretName = "istio-ca"
-
-#       subject = {
-#         organizations = ["istio.osinfra.io"]
-#       }
-#     }
-#   }
-# }
+# Kubernetes Manifest Resource
+# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest
 
 resource "kubernetes_manifest" "istio_ca_issuer" {
   manifest = {
