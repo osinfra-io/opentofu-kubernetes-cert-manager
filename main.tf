@@ -11,7 +11,9 @@ resource "tls_private_key" "cert_manager_root" {
 
 resource "tls_self_signed_cert" "cert_manager_root" {
   allowed_uses = [
-    "cert_signing"
+    "cert_signing",
+    "digital_signature",
+    "key_encipherment"
   ]
 
   is_ca_certificate = true
