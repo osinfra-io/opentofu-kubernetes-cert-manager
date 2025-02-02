@@ -46,6 +46,11 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
         group = "cert-manager.io"
       }
 
+      privateKey = {
+        algorithm = "ECDSA"
+        size      = 256
+      }
+
       secretName = "istio-ca"
 
       subject = {
