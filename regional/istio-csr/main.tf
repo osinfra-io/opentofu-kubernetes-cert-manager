@@ -25,6 +25,36 @@ resource "helm_release" "cert_manager_istio_csr" {
 # Kubernetes Manifest Resource
 # https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest
 
+resource "kubernetes_manifest" "istio_ca_certificate" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "Certificate"
+
+    metadata = {
+      name      = "istio-ca"
+      namespace = "istio-system"
+    }
+
+    spec = {
+      commonName = "istio-ca"
+      duration   = "2160h"
+      isCA       = true
+
+      issuerRef = {
+        name  = kubernetes_manifest.istio_ca_issuer.manifest.metadata.name
+        kind  = "Issuer"
+        group = "cert-manager.io"
+      }
+
+      secretName = "cacert"
+
+      subject = {
+        organizations = ["istio.osinfra.io"]
+      }
+    }
+  }
+}
+
 resource "kubernetes_manifest" "istio_ca_issuer" {
   manifest = {
     apiVersion = "cert-manager.io/v1"
