@@ -107,3 +107,14 @@ resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
     "tls.key" = var.tls_self_signed_cert_cert_manager_root_key
   }
 }
+
+resource "kubernetes_secret_v1" "root-ca" {
+  metadata {
+    name      = "istio-root-ca"
+    namespace = "cert-manager"
+  }
+
+  data = {
+    "ca.pem" = var.tls_self_signed_cert_cert_manager_root_cert
+  }
+}
