@@ -90,31 +90,20 @@ resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
 
     spec = {
       ca = {
-        secretName = "istio-cert-manager-ca"
+        secretName = "cacert"
       }
     }
   }
 }
 
-resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
+resource "kubernetes_secret_v1" "cacert" {
   metadata {
-    name      = "istio-cert-manager-ca"
+    name      = "cacert"
     namespace = "istio-system"
   }
 
   data = {
     "tls.crt" = var.tls_self_signed_cert_cert_manager_root_cert
     "tls.key" = var.tls_self_signed_cert_cert_manager_root_key
-  }
-}
-
-resource "kubernetes_secret_v1" "root-ca" {
-  metadata {
-    name      = "istio-root-ca"
-    namespace = "cert-manager"
-  }
-
-  data = {
-    "ca.pem" = var.tls_self_signed_cert_cert_manager_root_cert
   }
 }
