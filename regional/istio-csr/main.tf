@@ -51,7 +51,7 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
         size      = 256
       }
 
-      secretName = "istio-ca"
+      secretName = "cacerts"
 
       subject = {
         organizations = ["istio.osinfra.io"]
@@ -72,7 +72,7 @@ resource "kubernetes_manifest" "istio_ca_issuer" {
 
     spec = {
       ca = {
-        secretName = "istio-ca"
+        secretName = "cacerts"
       }
     }
   }
@@ -90,15 +90,15 @@ resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
 
     spec = {
       ca = {
-        secretName = "cacert"
+        secretName = "istio-cert-manager-ca"
       }
     }
   }
 }
 
-resource "kubernetes_secret_v1" "cacert" {
+resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
   metadata {
-    name      = "cacert"
+    name      = "istio-cert-manager-ca"
     namespace = "istio-system"
   }
 
@@ -107,3 +107,17 @@ resource "kubernetes_secret_v1" "cacert" {
     "tls.key" = var.tls_self_signed_cert_cert_manager_root_key
   }
 }
+
+# resource "kubernetes_secret_v1" "cacert" {
+#   metadata {
+#     name      = "cacert"
+#     namespace = "istio-system"
+#   }
+
+#   data = {
+#     "ca-cert.pem"    = var.intermediate_cert  # Intermediate CA cert
+#     "ca-key.pem"     = var.intermediate_key   # Intermediate CA key
+#     "root-cert.pem"  = var.tls_self_signed_cert_cert_manager_root_cert  # Root CA cert
+#     "cert-chain.pem" = "${var.intermediate_cert}\n${var.tls_self_signed_cert_cert_manager_root_cert}"  # Full Chain: Intermediate + Root
+#   }
+# }
