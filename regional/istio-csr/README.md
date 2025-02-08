@@ -27,7 +27,8 @@ No requirements.
 | [helm_release.cert_manager_istio_csr](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [kubernetes_manifest.istio_ca_certificate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.istio_ca_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
-| [kubernetes_manifest.istio_selfsigned_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.istio_intermediate_ca_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_secret_v1.istio_cert_manager_ca](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 
 ## Inputs
 
@@ -41,6 +42,8 @@ No requirements.
 | <a name="input_resources_limits_memory"></a> [resources\_limits\_memory](#input\_resources\_limits\_memory) | The memory limit for the Istio CSR container | `string` | `"64Mi"` | no |
 | <a name="input_resources_requests_cpu"></a> [resources\_requests\_cpu](#input\_resources\_requests\_cpu) | The CPU request for the Istio CSR container | `string` | `"25m"` | no |
 | <a name="input_resources_requests_memory"></a> [resources\_requests\_memory](#input\_resources\_requests\_memory) | The memory request for the Istio CSR container | `string` | `"32Mi"` | no |
+| <a name="input_tls_self_signed_cert_cert_manager_root_cert"></a> [tls\_self\_signed\_cert\_cert\_manager\_root\_cert](#input\_tls\_self\_signed\_cert\_cert\_manager\_root\_cert) | The self-signed certificate for the cert-manager root certificate | `string` | n/a | yes |
+| <a name="input_tls_self_signed_cert_cert_manager_root_key"></a> [tls\_self\_signed\_cert\_cert\_manager\_root\_key](#input\_tls\_self\_signed\_cert\_cert\_manager\_root\_key) | The private key for the cert-manager root certificate | `string` | n/a | yes |
 
 ## Outputs
 
