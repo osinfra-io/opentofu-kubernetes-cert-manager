@@ -36,17 +36,15 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
     }
 
     spec = {
-      isCA = true
+      commonName = "istio-intermediate-ca.osinfra.io"
+      duration   = "720h"
+      isCA       = true
 
       issuerRef = {
         name  = kubernetes_manifest.istio_intermediate_ca_issuer.manifest.metadata.name
         kind  = "Issuer"
         group = "cert-manager.io"
       }
-
-      commonName = "istio-intermediate-ca.osinfra.io"
-      duration   = "720h"
-
 
       privateKey = {
         algorithm = "ECDSA"
