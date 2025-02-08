@@ -92,7 +92,7 @@ resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
 
     spec = {
       ca = {
-        secretName = "cert-manager-ca"
+        secretName = kubernetes_secret_v1.istio_cert_manager_ca.metadata[0].name
       }
     }
   }
