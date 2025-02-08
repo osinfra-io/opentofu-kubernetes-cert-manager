@@ -20,8 +20,8 @@ resource "tls_self_signed_cert" "cert_manager_root" {
   private_key_pem   = tls_private_key.cert_manager_root.private_key_pem
 
   subject {
-    common_name  = "istio-cert-manager-ca.osinfra.io"
-    organization = "Open Source Infrastructure (as Code) Self-Signed"
+    common_name  = "terraform-self-signed-ca.osinfra.io"
+    organization = "Open Source Infrastructure (as Code) Terraform Self-Signed CA"
   }
 
   validity_period_hours = 262980

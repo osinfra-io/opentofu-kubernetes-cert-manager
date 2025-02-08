@@ -36,15 +36,18 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
     }
 
     spec = {
-      commonName = "istio-ca"
-      duration   = "720h"
-      isCA       = true
+      isCA = true
 
       issuerRef = {
         name  = kubernetes_manifest.istio_intermediate_ca_issuer.manifest.metadata.name
         kind  = "Issuer"
         group = "cert-manager.io"
       }
+
+      commonName   = "istio-intermediate-ca.osinfra.io"
+      organization = "Open Source Infrastructure (as Code) Istio Intermediate CA"
+      duration     = "720h"
+
 
       privateKey = {
         algorithm = "ECDSA"
@@ -90,7 +93,7 @@ resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
 
     spec = {
       ca = {
-        secretName = "istio-cert-manager-ca"
+        secretName = "cert-manager-ca"
       }
     }
   }
@@ -98,7 +101,7 @@ resource "kubernetes_manifest" "istio_intermediate_ca_issuer" {
 
 resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
   metadata {
-    name      = "istio-cert-manager-ca"
+    name      = "cert-manager-ca"
     namespace = "istio-system"
   }
 
@@ -107,14 +110,3 @@ resource "kubernetes_secret_v1" "istio_cert_manager_ca" {
     "tls.key" = var.tls_self_signed_cert_cert_manager_root_key
   }
 }
-
-# resource "kubernetes_secret_v1" "istio_root_ca" {
-#   metadata {
-#     name      = "istio-root-ca"
-#     namespace = "cert-manager"
-#   }
-
-#   data = {
-#     "ca.pem" = "${var.intermediate_cert}\n${var.tls_self_signed_cert_cert_manager_root_cert}"
-#   }
-# }
