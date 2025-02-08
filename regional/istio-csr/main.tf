@@ -44,9 +44,8 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
         group = "cert-manager.io"
       }
 
-      commonName   = "istio-intermediate-ca.osinfra.io"
-      organization = "Open Source Infrastructure (as Code) Istio Intermediate CA"
-      duration     = "720h"
+      commonName = "istio-intermediate-ca.osinfra.io"
+      duration   = "720h"
 
 
       privateKey = {
@@ -57,7 +56,7 @@ resource "kubernetes_manifest" "istio_ca_certificate" {
       secretName = "istio-ca"
 
       subject = {
-        organizations = ["istio.osinfra.io"]
+        organizations = ["Open Source Infrastructure (as Code) Istio Intermediate CA"]
       }
     }
   }
