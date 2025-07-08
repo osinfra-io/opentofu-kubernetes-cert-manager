@@ -1,14 +1,13 @@
 # Local Values
 # https://www.terraform.io/docs/language/values/locals.html
-
 locals {
-  helm_values = {
+  helm_values_map = {
     "cainjector.podLabels.tags\\.datadoghq\\.com/service"      = "cert-manager-cainjector"
-    "cainjector.resources.limits.cpu"                          = var.cain_injector_resources_limits_cpu
-    "cainjector.resources.limits.memory"                       = var.cain_injector_resources_limits_memory
-    "cainjector.resources.requests.cpu"                        = var.cain_injector_resources_requests_cpu
-    "cainjector.resources.requests.memory"                     = var.cain_injector_resources_requests_memory
-    "cainjector.replicaCount"                                  = var.cain_injector_replicas
+    "cainjector.resources.limits.cpu"                          = var.cainjector_resources_limits_cpu
+    "cainjector.resources.limits.memory"                       = var.cainjector_resources_limits_memory
+    "cainjector.resources.requests.cpu"                        = var.cainjector_resources_requests_cpu
+    "cainjector.resources.requests.memory"                     = var.cainjector_resources_requests_memory
+    "cainjector.replicaCount"                                  = var.cainjector_replicas
     "global.commonLabels.tags\\.datadoghq\\.com/env"           = module.helpers.environment
     "global.commonLabels.tags\\.datadoghq\\.com/version"       = var.cert_manager_version
     "podLabels.tags\\.datadoghq\\.com/service"                 = "cert-manager"
@@ -29,4 +28,11 @@ locals {
     "webhook.resources.requests.memory"                        = var.webhook_resources_requests_memory
     "webhook.replicaCount"                                     = var.webhook_replicas
   }
+
+  helm_values = [
+    for k, v in local.helm_values_map : {
+      name  = k
+      value = v
+    }
+  ]
 }

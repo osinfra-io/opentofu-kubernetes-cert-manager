@@ -7,32 +7,32 @@ variable "artifact_registry" {
   default     = "us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"
 }
 
-variable "cain_injector_replicas" {
+variable "cainjector_replicas" {
   description = "The number of replicas to run for the cain-injector"
   type        = number
   default     = 1
 }
 
-variable "cain_injector_resources_limits_cpu" {
-  description = "The CPU limit for the cain-injector resources"
+variable "cainjector_resources_limits_cpu" {
+  description = "The CPU limit for the cainjector resources"
   type        = string
   default     = "20m"
 }
 
-variable "cain_injector_resources_limits_memory" {
-  description = "The memory limit for the cain-injector resources"
+variable "cainjector_resources_limits_memory" {
+  description = "The memory limit for the cainjector resources"
   type        = string
   default     = "64Mi"
 }
 
-variable "cain_injector_resources_requests_cpu" {
-  description = "The CPU request for the cain-injector resources"
+variable "cainjector_resources_requests_cpu" {
+  description = "The CPU request for the cainjector resources"
   type        = string
   default     = "10m"
 }
 
-variable "cain_injector_resources_requests_memory" {
-  description = "The memory request for the cain-injector resources"
+variable "cainjector_resources_requests_memory" {
+  description = "The memory request for the cainjector resources"
   type        = string
   default     = "32Mi"
 }
@@ -40,7 +40,7 @@ variable "cain_injector_resources_requests_memory" {
 variable "cert_manager_version" {
   description = "The version to install, this is used for the chart as well as the image tag"
   type        = string
-  default     = "1.17.2"
+  default     = "1.18.2"
 }
 
 variable "chart_repository" {
