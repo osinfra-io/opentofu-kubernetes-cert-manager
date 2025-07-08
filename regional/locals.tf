@@ -3,11 +3,11 @@
 locals {
   helm_values_map = {
     "cainjector.podLabels.tags\\.datadoghq\\.com/service"      = "cert-manager-cainjector"
-    "cainjector.resources.limits.cpu"                          = var.cain_injector_resources_limits_cpu
-    "caininjector.resources.limits.memory"                     = var.cain_injector_resources_limits_memory
-    "caininjector.resources.requests.cpu"                      = var.cain_injector_resources_requests_cpu
-    "caininjector.resources.requests.memory"                   = var.cain_injector_resources_requests_memory
-    "caininjector.replicaCount"                                = var.cain_injector_replicas
+    "cainjector.resources.limits.cpu"                          = var.cainjector_resources_limits_cpu
+    "cainjector.resources.limits.memory"                       = var.cainjector_resources_limits_memory
+    "cainjector.resources.requests.cpu"                        = var.cainjector_resources_requests_cpu
+    "cainjector.resources.requests.memory"                     = var.cainjector_resources_requests_memory
+    "cainjector.replicaCount"                                  = var.cainjector_replicas
     "global.commonLabels.tags\\.datadoghq\\.com/env"           = module.helpers.environment
     "global.commonLabels.tags\\.datadoghq\\.com/version"       = var.cert_manager_version
     "podLabels.tags\\.datadoghq\\.com/service"                 = "cert-manager"

@@ -11,7 +11,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 3.0.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 3.0.2 |
 
 ## Modules
 
@@ -30,11 +30,11 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_artifact_registry"></a> [artifact\_registry](#input\_artifact\_registry) | The registry to pull the images from | `string` | `"us-docker.pkg.dev/plt-lz-services-tf79-prod/plt-docker-virtual"` | no |
-| <a name="input_cain_injector_replicas"></a> [cain\_injector\_replicas](#input\_cain\_injector\_replicas) | The number of replicas to run for the cain-injector | `number` | `1` | no |
-| <a name="input_cain_injector_resources_limits_cpu"></a> [cain\_injector\_resources\_limits\_cpu](#input\_cain\_injector\_resources\_limits\_cpu) | The CPU limit for the cain-injector resources | `string` | `"20m"` | no |
-| <a name="input_cain_injector_resources_limits_memory"></a> [cain\_injector\_resources\_limits\_memory](#input\_cain\_injector\_resources\_limits\_memory) | The memory limit for the cain-injector resources | `string` | `"64Mi"` | no |
-| <a name="input_cain_injector_resources_requests_cpu"></a> [cain\_injector\_resources\_requests\_cpu](#input\_cain\_injector\_resources\_requests\_cpu) | The CPU request for the cain-injector resources | `string` | `"10m"` | no |
-| <a name="input_cain_injector_resources_requests_memory"></a> [cain\_injector\_resources\_requests\_memory](#input\_cain\_injector\_resources\_requests\_memory) | The memory request for the cain-injector resources | `string` | `"32Mi"` | no |
+| <a name="input_cainjector_replicas"></a> [cainjector\_replicas](#input\_cainjector\_replicas) | The number of replicas to run for the cain-injector | `number` | `1` | no |
+| <a name="input_cainjector_resources_limits_cpu"></a> [cainjector\_resources\_limits\_cpu](#input\_cainjector\_resources\_limits\_cpu) | The CPU limit for the cainjector resources | `string` | `"20m"` | no |
+| <a name="input_cainjector_resources_limits_memory"></a> [cainjector\_resources\_limits\_memory](#input\_cainjector\_resources\_limits\_memory) | The memory limit for the cainjector resources | `string` | `"64Mi"` | no |
+| <a name="input_cainjector_resources_requests_cpu"></a> [cainjector\_resources\_requests\_cpu](#input\_cainjector\_resources\_requests\_cpu) | The CPU request for the cainjector resources | `string` | `"10m"` | no |
+| <a name="input_cainjector_resources_requests_memory"></a> [cainjector\_resources\_requests\_memory](#input\_cainjector\_resources\_requests\_memory) | The memory request for the cainjector resources | `string` | `"32Mi"` | no |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | The version to install, this is used for the chart as well as the image tag | `string` | `"1.18.2"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | The repository to pull the cert-manager Helm chart from | `string` | `"https://charts.jetstack.io"` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | The number of replicas to run | `number` | `1` | no |
