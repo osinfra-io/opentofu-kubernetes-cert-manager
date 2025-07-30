@@ -1,4 +1,4 @@
-# Terraform Documentation
+# OpenTofu Documentation
 
 > A child module automatically inherits default (un-aliased) provider configurations from its parent. The provider versions below are informational only and do **not** need to align with the provider configurations from its parent.
 
@@ -23,7 +23,7 @@ No requirements.
 
 | Name | Type |
 |------|------|
-| [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [helm_release.cert_manager](https://search.opentofu.org/provider/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 

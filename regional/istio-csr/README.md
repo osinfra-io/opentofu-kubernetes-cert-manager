@@ -1,4 +1,4 @@
-# Terraform Documentation
+# OpenTofu Documentation
 
 > A child module automatically inherits default (un-aliased) provider configurations from its parent. The provider versions below are informational only and do **not** need to align with the provider configurations from its parent.
 
@@ -24,11 +24,11 @@ No requirements.
 
 | Name | Type |
 |------|------|
-| [helm_release.cert_manager_istio_csr](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_manifest.istio_ca_certificate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
-| [kubernetes_manifest.istio_ca_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
-| [kubernetes_manifest.istio_intermediate_ca_issuer](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
-| [kubernetes_secret_v1.istio_cert_manager_ca](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
+| [helm_release.cert_manager_istio_csr](https://search.opentofu.org/provider/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_manifest.istio_ca_certificate](https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.istio_ca_issuer](https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.istio_intermediate_ca_issuer](https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_secret_v1.istio_cert_manager_ca](https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 
 ## Inputs
 
