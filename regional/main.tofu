@@ -1,5 +1,5 @@
 # Helm Release
-# https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release
+# https://search.opentofu.org/provider/hashicorp/helm/latest/docs/resources/release
 
 resource "helm_release" "cert_manager" {
   chart      = "cert-manager"
