@@ -20,9 +20,9 @@ resource "tls_self_signed_cert" "cert_manager_root" {
   private_key_pem   = tls_private_key.cert_manager_root.private_key_pem
 
   subject {
-    common_name  = "terraform-self-signed-ca.osinfra.io"
+    common_name  = "opentofu-self-signed-ca.osinfra.io"
     organization = "Open Source Infrastructure (as Code) OpenTofu Self-Signed CA"
   }
 
-  validity_period_hours = 262980
+  validity_period_hours = 262980 # 30 years
 }
