@@ -10,18 +10,18 @@ variable "artifact_registry" {
 variable "cert_manager_istio_csr_version" {
   description = "The version to install for the Istio CSR, this is used for the chart as well as the image tag"
   type        = string
-  default     = "0.14.2"
-}
-
-variable "cluster_prefix" {
-  description = "Prefix for your cluster name, region, and zone (if applicable) will be added to the end of the cluster name"
-  type        = string
+  default     = "0.15.1"
 }
 
 variable "chart_repository" {
   description = "The repository to pull the cert-manager Helm chart from"
   type        = string
   default     = "https://charts.jetstack.io"
+}
+
+variable "cluster_prefix" {
+  description = "Prefix for your cluster name, region, and zone (if applicable) will be added to the end of the cluster name"
+  type        = string
 }
 
 variable "resources_limits_cpu" {
