@@ -1,5 +1,5 @@
 # Input Variables
-# https://www.terraform.io/language/values/variables
+# https://opentofu.org/docs/language/values/variables
 
 variable "artifact_registry" {
   description = "The registry to pull the images from"
@@ -8,7 +8,7 @@ variable "artifact_registry" {
 }
 
 variable "cainjector_replicas" {
-  description = "The number of replicas to run for the cain-injector"
+  description = "The number of replicas to run for the cainjector"
   type        = number
   default     = 1
 }
