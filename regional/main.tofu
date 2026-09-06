@@ -7,10 +7,9 @@ resource "helm_release" "cert_manager" {
   namespace  = "cert-manager"
   repository = var.chart_repository
 
-  set = local.helm_values
-
   values = [
-    file("${path.module}/helm/cert-manager.yml")
+    file("${path.module}/helm/cert-manager.yml"),
+    yamlencode(local.helm_values)
   ]
 
   version = var.cert_manager_version
